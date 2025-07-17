@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>🎉 Congratulations</title>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .message {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -30%);
+      z-index: 2;
+      font-size: 1.5rem;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body id="bodyBackground">
+
+  <div class="message" id="messageBox"></div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get("name");
+    const code = urlParams.get("code");
+
+    const couponDetails = {
+      "EDU18": "For Your Register Course",
+      "EDU20": "For Your Register Course",
+      "EDU22": "For Your Register Course",
+      "EDU24": "For Your Register Course",
+      "EDU25": "For Your Register Course",
+      "TAL5": "For Your Register Course",
+      "TAL6": "For Your Register Course",
+      "TAL7": "For Your Register Course",
+      "TAL8": "For Your Register Course",
+      "TAL9": "For Your Register Course",
+      "TAL10": "For Your Register Course"
+    };
+
+    // 🎨 Define a unique background for each coupon
+    const couponBackgrounds = {
+      "EDU18": "https://i.pinimg.com/originals/00/a6/ca/00a6cad8f84a317df9d8287aea516b7f.gif",
+      "EDU20": "https://cliply.co/wp-content/uploads/2021/09/CLIPLY_372109170_FREE_FIREWORKS_400.gif",
+      "EDU22": "https://www.icegif.com/wp-content/uploads/2025/05/confetti-icegif.gif",
+      "EDU24": "https://i.pinimg.com/originals/e5/83/3e/e5833e1bea7d379f0f4e4ae250b7cf81.gif",
+      "EDU25": "https://media.licdn.com/dms/image/v2/D4E22AQFatZEKi4q6Hw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1715001332879?e=2147483647&v=beta&t=JwIHK-61j-EFL4YjYDY9a8NcOgrwM3nosPqF7CfqoNg",
+      "TAL5": "https://i.pinimg.com/originals/e4/11/10/e41110dc0bc98b1e36ddf291d209718c.gif",
+      "TAL6": "https://img1.picmix.com/output/stamp/normal/5/3/2/3/2623235_2a3b2.gif",
+      "TAL7": "https://cliply.co/wp-content/uploads/2019/08/371908020_CONFETTI_400px.gif",
+      "TAL8": "https://i.pinimg.com/originals/fd/b0/9c/fdb09cd5e747f5c8330f998f11efb0a1.gif",
+      "TAL9": "https://img1.picmix.com/output/stamp/normal/0/5/5/2/592550_65d07.gif",
+      "TAL10": "https://www.gifcen.com/wp-content/uploads/2022/11/confetti-gif-2.gif"
+    };
+
+    const messageBox = document.getElementById("messageBox");
+    const body = document.getElementById("bodyBackground");
+
+    if (name && code && couponDetails[code]) {
+      // 🎯 Set background based on specific coupon
+      const bg = couponBackgrounds[code];
+      if (bg) {
+        body.style.backgroundImage = `url(${bg})`;
+      } else {
+        body.style.background = "#000"; // fallback
+      }
+
+      messageBox.innerHTML = `
+        <h2>DTPL Academy says</h2>
+        <p>Hi ${name},</p>
+        <p>🎉 Congratulations! Your coupon has been successfully applied  "<strong>${couponDetails[code]}</strong>".</p>
+        <p>For further information, please visit our Academy.</p>
+      `;
+    } else {
+      body.style.background = "#000";
+      messageBox.innerHTML = `<p>Oops! Something went wrong. Please try again.</p>`;
+    }
+
+
+ emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+    user_name: name,
+    coupon_code: code
+  }).then(
+    function (response) {
+      console.log("SUCCESS!", response.status, response.text);
+    },
+    function (error) {
+      console.error("FAILED...", error);
+    }
+  );
+
+  </script>
+
+</body>
+
+</html>

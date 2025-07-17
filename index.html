@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Coupon Redemption</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>🎁 Coupon Redemption</h2>
+    <input type="text" id="username" placeholder="Enter Your Name" required />
+    <input type="text" id="couponCode" placeholder="Enter Coupon Code" required />
+    <button onclick="redeemCoupon()" > Redeem </button>
+  </div>
+
+  
+
+ <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your EmailJS public key
+</script>
+
+  <script src="demo.js"></script>
+</body>
+</html>
